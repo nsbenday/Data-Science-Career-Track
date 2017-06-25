@@ -1,0 +1,27 @@
+JSON Project: In this project, we obtained practice using read_json and json_normalize to open json files and perform some analysis.
+
+Question1: Find the top 10 countries with the most project.
+
+Load pandas dataframe from json file.Groupby 'countryname' column and apply the size method to find the number of projects for each country.Sort the series in descending order and apply the .head() method to find the top 10 countries with most projects.
+
+df = pd.read_json('data/world_bank_projects.json')
+country_names = df.groupby('countryname').size().sort_values(ascending=False)
+country_names.head(10)
+
+Question 2: Find the top 10 major project themes.
+
+Load json file as a string. Load json file as a string
+Groupby 'name' column and apply the size method to find the number of instances for each project theme. Sort the series in descending order and apply the head method to find the top 10 themes.
+
+js = json.load((open('data/world_bank_projects.json')))
+themes = json_normalize(js, 'mjtheme_namecode')
+themes.groupby('name').size().sort_values(ascending=False).head(10)
+
+Question 3: Fill in the blanks
+
+Replace blanks in the name column with NaN. Groupby 'code' column and apply the bfill method to fill in the null values. 
+
+
+t2.name.replace('',np.nan,inplace=True)
+t3 = t2.groupby('code', as_index = False).bfill()
+t3
